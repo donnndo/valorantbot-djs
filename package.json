@@ -12,5 +12,8 @@
     "discord.js": "^13.4.0",
     "fs": "^0.0.1-security",
     "unofficial-valorant-api": "^1.0.4"
-  }
+  },
+  "engines": {
+    "node": "17.3.0"
+    }
 }
