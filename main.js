@@ -7,7 +7,7 @@ const client = new Discord.Client({intents: [
     Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS
 ]});
 
-const config = require('./config.json')
+//const config = require('./config.json')
 
 let prefix = '+'
 
@@ -47,4 +47,4 @@ client.on("messageCreate", message => {
 })
 
 
-client.login(config.token);
+client.login(process.env.DJS_TOKEN);
