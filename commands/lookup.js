@@ -12,7 +12,6 @@ module.exports = {
         async function sendAccount(name, tag) {
             const account = await ValAPI.getAccount(name, tag);
             const accountMMR = await ValAPI.getMMR('v2', account.data.region, name, tag);
-            console.log(accountMMR);
             createEmbed
                 .setTitle(`${account.data.name}#${account.data.tag}`)
                 .setThumbnail(account.data.card.small)
