@@ -59,6 +59,21 @@ module.exports = {
                     .catch(collected => {});
             });
         }
+
+        async function lookupPosition(region, player) {
+            const leaderboard = await ValAPI.getLeaderboard(region)
+            player = player.split('#')
+            const index = leaderboard.findIndex(object => {
+                return object.gameName == player[0] && object.tagLine == player[1]
+            })
+            player = leaderboard[index]
+            leaderboardEmbed
+                .setTitle(`${leaderboard[index].gameName}#${leaderboard[index].tagLine}`)
+                .setDescription(leaderboardPretty.slice((player.leaderboardRank-12), (player.leaderboardRank+12)).join('\n'))
+            message.channel.send({ embeds: [leaderboardEmbed] })
+        }
+
+
         var region = args[0].toLowerCase()
         if(region == "na" || region == "eu" || region == "ap" || region == "kr"){
             if(!args[1]){
@@ -67,6 +82,8 @@ module.exports = {
                 getLeaderboard(args[0], Math.round(args[1]))
             } else if(args[1] == 0){
                 message.reply("Page number must be greater than 0!")
+            } else if(args.slice(1, args.length).join().includes('#')){
+                lookupPosition(args[0], args.slice(1, args.length).join())
             } else {
                 message.reply("Invalid syntax!")
             }
